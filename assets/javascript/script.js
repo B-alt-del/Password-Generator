@@ -40,30 +40,43 @@ function char_selection(characters){
   var Num_special = 0;
 
   var chars_lowercase = confirm("Would you like to include lowercase letters?");
-    if(chars_lowercase){
-      Num_lowercase = prompt("How many lowercase letters? (" + characters + " characters remaining)"); 
-      characters = characters - Num_lowercase;
-        console.log(Num_lowercase);
-        console.log(characters);
+  if(chars_lowercase){
+    Num_lowercase = prompt("How many lowercase letters? (" + characters + " characters remaining)"); 
+    while(Num_lowercase > Number(characters)){
+      Num_lowercase = prompt("Error: input cannot be greater than " + characters + "! How many lowercase letters? ("+ characters + " characters remaining)");
     }
-
-  var chars_capitol = confirm("Capitol letters?");
-    if(chars_capitol){
-      Num_capitols = prompt("How many capitol letters? (" + characters + " characters remaining)");
-      characters = characters - Num_capitols;
+    characters = characters - Num_lowercase;
+  }
+  if(Number(characters)>0){
+    var chars_capitol = confirm("Capitol letters?");
+      if(chars_capitol){
+        Num_capitols = prompt("How many capitol letters? (" + characters + " characters remaining)");
+        while(Num_capitols > Number(characters)){
+          Num_capitols = prompt("Error: input cannot be greater than " + characters + "! How many Capitol letters? ("+ characters + " characters remaining)");
+        }
+        characters = characters - Num_capitols;
+      }
+    if(Number(characters)>0){
+      var chars_numbers = confirm("Numbers?");
+        if(chars_numbers){
+          Num_numbers = prompt("How many numbers? (" + characters + " characters remaining");
+          while(Num_numbers > Number(characters)){
+            Num_numbers = prompt("Error: input cannot be greater than " + characters + "! How many numbers? ("+ characters + " characters remaining)");
+          }
+          characters = characters - Num_numbers;
+        }
+      if(Number(characters)>0){
+        var chars_special = confirm("Special charaters?");
+          if(chars_special){
+            Num_special = prompt("How many special characters? (" + characters + " characters remaining");
+          while(Num_special > Number(characters)){
+            Num_special = prompt("Error: input cannot be greater than " + characters + "! How many special characters? ("+ characters + " characters remaining)");
+          }
+            characters = characters - Num_special;
+          }
+      }
     }
-
-  var chars_numbers = confirm("Numbers?");
-    if(chars_numbers){
-      Num_numbers = prompt("How many capitol letters? (" + characters + " characters remaining");
-      characters = characters - Num_numbers;
-    }
-
-  var chars_special = confirm("Special charaters?");
-    if(chars_special){
-      Num_special = prompt("How many capitol letters? (" + characters + " characters remaining");
-      characters = characters - Num_special;
-    }
+  }
 
   if(characters > 0){
     alert("The remaining (" + characters + ") will be filled with lowercase characters.");
@@ -82,7 +95,6 @@ function char_selection(characters){
   return user_selections;
 
 }
-
 
 function writePassword() {
   var password = generatePassword();
